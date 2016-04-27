@@ -60,7 +60,7 @@ AS       := as
 ## User defined environment variables
 ##
 CodeLiteDir:=/usr/share/codelite
-Objects0=$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/Mappa.cpp$(ObjectSuffix) $(IntermediateDirectory)/Nodo.cpp$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/Mappa.cpp$(ObjectSuffix) $(IntermediateDirectory)/Nodo.cpp$(ObjectSuffix) $(IntermediateDirectory)/Giocatore.cpp$(ObjectSuffix) 
 
 
 
@@ -114,6 +114,14 @@ $(IntermediateDirectory)/Nodo.cpp$(DependSuffix): Nodo.cpp
 
 $(IntermediateDirectory)/Nodo.cpp$(PreprocessSuffix): Nodo.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Nodo.cpp$(PreprocessSuffix) "Nodo.cpp"
+
+$(IntermediateDirectory)/Giocatore.cpp$(ObjectSuffix): Giocatore.cpp $(IntermediateDirectory)/Giocatore.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/fabio/project/ProgettoProgrammazione/Gioco/Giocatore.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Giocatore.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Giocatore.cpp$(DependSuffix): Giocatore.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Giocatore.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Giocatore.cpp$(DependSuffix) -MM "Giocatore.cpp"
+
+$(IntermediateDirectory)/Giocatore.cpp$(PreprocessSuffix): Giocatore.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Giocatore.cpp$(PreprocessSuffix) "Giocatore.cpp"
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)

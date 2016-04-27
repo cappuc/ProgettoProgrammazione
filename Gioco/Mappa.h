@@ -4,11 +4,17 @@
 
 class Mappa {
 	
+	struct Visitati{
+		Visitati *next;
+		Nodo *nodo;
+	};
+	
 private:
 	Nodo *nodoIniziale;
+	
 public:
 	Mappa();
-	void stampaMappa(Nodo *n);
+	void stampaMappa(Nodo *n, Visitati *v);
 };
 
 #endif

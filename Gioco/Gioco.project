@@ -96,5 +96,7 @@
     <File Name="Mappa.h"/>
     <File Name="Nodo.h"/>
     <File Name="Nodo.cpp"/>
+    <File Name="Giocatore.h"/>
+    <File Name="Giocatore.cpp"/>
   </VirtualDirectory>
 </CodeLite_Project>

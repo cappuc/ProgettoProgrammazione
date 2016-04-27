@@ -7,20 +7,33 @@ Mappa::Mappa() {
 	this->nodoIniziale = new Nodo(0,0,0,0,0,0);
 	
 	this->nodoIniziale->goNord()->goOvest();
-	//printf("X: %d - Y: %d\n", n->getCordX(), n->getCordY());
-	//printf("X: %d - Y: %d\n", n->goNord()->getCordX(), n->goNord()->getCordY());
-	//printf("X: %d - Y: %d\n", n->goNord()->getCordX(), n->goNord()->getCordY());
-	stampaMappa(this->nodoIniziale);
+	this->nodoIniziale->goEst()->goSud();
+	
+	stampaMappa(this->nodoIniziale, 0);
 };
 
-void Mappa::stampaMappa(Nodo *n) {
+void Mappa::stampaMappa(Nodo *n, Visitati *v) {
 	if (n == 0) {
 		return;
 	} else {
-		printf("x: %d - y: %d\n", n->getCordX(), n->getCordY());
-		stampaMappa(n->getNord());
-		stampaMappa(n->getSud());
-		stampaMappa(n->getOvest());
-		stampaMappa(n->getSud());
+		Visitati *pos = v;
+		bool visit = false;
+		while (pos != 0) {
+			if (pos->nodo == n) {
+				visit = true;
+			}
+			pos = pos->next;
+		}
+		if (!visit) {
+			printf("x: %d - y: %d\n", n->getCordX(), n->getCordY());
+			pos = new Visitati;
+			pos->nodo = n;
+			pos->next = v;
+			v = pos;
+			stampaMappa(n->getNord(), v);
+			stampaMappa(n->getSud(), v);
+			stampaMappa(n->getOvest(), v);
+			stampaMappa(n->getEst(), v);
+		}		
 	}
 }
