@@ -91,7 +91,7 @@ void Nodo::stampaGiocatori() {
 	StructGiocatori* giocatori = this->giocatori;
 	while (giocatori != NULL) {
 		//Da modificare
-		cout << giocatori->giocatore->getId();
+		cout << giocatori->giocatore->getNome();
 		giocatori = giocatori->next;
 	}
 }

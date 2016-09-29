@@ -9,8 +9,9 @@ Giocatore::Giocatore(char* n, int id) {
 	this->id = id;
 }
 
-void Giocatore::getNome(char n[]) {
-	strcpy(n, this->nome);
+char* Giocatore::getNome() {
+//	strcpy(n, this->nome);
+	return this->nome;
 }
 
 int Giocatore::getId() {

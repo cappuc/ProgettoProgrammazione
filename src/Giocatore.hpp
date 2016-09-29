@@ -16,7 +16,7 @@ private:
 
 public:
 	Giocatore(char* n, int id);
-	void getNome(char n[]);
+	char* getNome();
 	int getId();
 };
 
