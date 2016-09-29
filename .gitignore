@@ -1,5 +1,84 @@
 
+<<<<<<< HEAD
 # Created by https://www.gitignore.io/api/eclipse,c++
+=======
+# Created by https://www.gitignore.io/api/linux,windows,osx,codeblocks,eclipse
+
+### Linux ###
+*~
+
+# temporary files which can be created if a process still has a handle open of a deleted file
+.fuse_hidden*
+
+# KDE directory preferences
+.directory
+
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
+
+
+### Windows ###
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+
+### OSX ###
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+
+### CodeBlocks ###
+# specific to CodeBlocks IDE
+*.cbp
+*.layout
+*.depend
+
+# generated directories
+bin/
+obj/
+
+
+
+
+>>>>>>> 26dea79997d743040d0f1c7040b5b8761c97665a
 
 ### Eclipse ###
 
@@ -54,6 +133,7 @@ local.properties
 # Code Recommenders
 .recommenders/
 
+<<<<<<< HEAD
 
 ### C++ ###
 # Prerequisites
@@ -88,3 +168,5 @@ local.properties
 *.exe
 *.out
 *.app
+=======
+>>>>>>> 26dea79997d743040d0f1c7040b5b8761c97665a
