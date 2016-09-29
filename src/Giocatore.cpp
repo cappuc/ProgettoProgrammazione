@@ -4,12 +4,12 @@
 
 #include "Giocatore.hpp"
 
-Giocatore::Giocatore(char n[STRING_LENGTH], int id) {
+Giocatore::Giocatore(char* n, int id) {
 	strcpy(this->nome, n);
 	this->id = id;
 }
 
-void Giocatore::getNome(char n[STRING_LENGTH]) {
+void Giocatore::getNome(char n[]) {
 	strcpy(n, this->nome);
 }
 

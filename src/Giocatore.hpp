@@ -15,8 +15,8 @@ private:
 	int id;
 
 public:
-	Giocatore(char n[STRING_LENGTH], int id);
-	void getNome(char n[STRING_LENGTH]);
+	Giocatore(char* n, int id);
+	void getNome(char n[]);
 	int getId();
 };
 

@@ -8,10 +8,19 @@
 #ifndef NODO_HPP_
 #define NODO_HPP_
 
+#include "Giocatore.hpp"
+
 class Nodo {
+
+	struct StructGiocatori {
+		Giocatore* giocatore;
+		StructGiocatori* next;
+	};
+
 private:
 	Nodo *nord, *sud, *ovest, *est;
 	int x, y;
+	StructGiocatori *giocatori;
 
 public:
 	Nodo(int xx, int yy, Nodo *n, Nodo *s, Nodo *o, Nodo *e);
@@ -25,6 +34,10 @@ public:
 	Nodo* getSud();
 	Nodo* getOvest();
 	Nodo* getEst();
+	void addGiocatore(Giocatore *g);
+	void removeGiocatore(Giocatore *g);
+	bool giocatorePresente(Giocatore *g);
+	void stampaGiocatori();
 
 };
 

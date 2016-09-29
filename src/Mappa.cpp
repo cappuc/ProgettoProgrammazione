@@ -7,13 +7,17 @@
 #include <stdio.h>
 
 Mappa::Mappa() {
+
 	printf("Ciao sono la Mappa!\n");
 	this->nodoIniziale = new Nodo(0, 0, 0, 0, 0, 0);
-
 	this->nodoIniziale->goNord()->goOvest();
 	this->nodoIniziale->goEst()->goSud();
 
 	stampaMappa(this->nodoIniziale, 0);
+
+	Giocatore* g = new Giocatore("Fabio", 1);
+	this->nodoIniziale->addGiocatore(g);
+	this->nodoIniziale->stampaGiocatori();
 }
 ;
 

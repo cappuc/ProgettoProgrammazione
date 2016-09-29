@@ -6,6 +6,7 @@
 #define MAPPA_HPP_
 
 #include "Nodo.hpp"
+#include "Giocatore.hpp"
 
 class Mappa {
 

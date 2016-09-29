@@ -3,8 +3,15 @@
  */
 
 #include "Nodo.hpp"
+#include <iostream>
+#include <stdlib.h>
+#include <cstring>
+
+using namespace std;
 
 Nodo::Nodo(int xx, int yy, Nodo *n, Nodo *s, Nodo *o, Nodo *e) {
+	giocatori = NULL;
+
 	//Imposta le cordinate del nodo
 	this->x = xx;
 	this->y = yy;
@@ -71,5 +78,21 @@ Nodo* Nodo::getOvest() {
 }
 Nodo* Nodo::getEst() {
 	return this->est;
+}
+
+void Nodo::addGiocatore(Giocatore *g) {
+	StructGiocatori* nuovoGiocatore = new StructGiocatori;
+	nuovoGiocatore->giocatore = g;
+	nuovoGiocatore->next = this->giocatori;
+	this->giocatori = nuovoGiocatore;
+}
+
+void Nodo::stampaGiocatori() {
+	StructGiocatori* giocatori = this->giocatori;
+	while (giocatori != NULL) {
+		//Da modificare
+		cout << giocatori->giocatore->getId();
+		giocatori = giocatori->next;
+	}
 }
 
