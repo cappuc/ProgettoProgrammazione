@@ -5,19 +5,23 @@
 #ifndef GIOCATORE_HPP_
 #define GIOCATORE_HPP_
 
-#define STRING_LENGTH 20
+#include "Utility.hpp"
+#include <string.h>
 
-#include<string.h>
+class Nodo;
 
 class Giocatore {
 private:
 	char nome[STRING_LENGTH];
 	int id;
+	Nodo* posizione;
 
 public:
-	Giocatore(char* n, int id);
+	Giocatore(char* n, int id, Nodo* init);
 	char* getNome();
 	int getId();
+	void setPosizione(Nodo* n);
+	Nodo* getPosizione();
 };
 
 #endif /* GIOCATORE_HPP_ */

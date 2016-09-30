@@ -4,9 +4,10 @@
 
 #include "Giocatore.hpp"
 
-Giocatore::Giocatore(char* n, int id) {
+Giocatore::Giocatore(char* n, int id, Nodo* init) {
 	strcpy(this->nome, n);
 	this->id = id;
+	this->posizione = init;
 }
 
 char* Giocatore::getNome() {
@@ -16,4 +17,12 @@ char* Giocatore::getNome() {
 
 int Giocatore::getId() {
 	return this->id;
+}
+
+void Giocatore::setPosizione(Nodo* n) {
+	this->posizione = n;
+}
+
+Nodo* Giocatore::getPosizione() {
+	return this->posizione;
 }

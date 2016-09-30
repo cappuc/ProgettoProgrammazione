@@ -17,6 +17,8 @@ class Mappa {
 
 private:
 	Nodo *nodoIniziale;
+	void setNodoVisitato(Nodo *n);
+	Nodo findNodoCord(int x, int y);
 
 public:
 	Mappa();

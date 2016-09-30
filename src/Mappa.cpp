@@ -3,8 +3,9 @@
  */
 
 #include "Mappa.hpp"
-//#include "Nodo.h"
 #include <stdio.h>
+
+using namespace std;
 
 Mappa::Mappa() {
 
@@ -15,9 +16,10 @@ Mappa::Mappa() {
 
 	stampaMappa(this->nodoIniziale, 0);
 
-	Giocatore* g = new Giocatore("Fabio", 1);
+	Giocatore* g = new Giocatore("Fabio", 1, this->nodoIniziale);
 	this->nodoIniziale->addGiocatore(g);
 	this->nodoIniziale->stampaGiocatori();
+//	cout << g->getPosizione()->getCordY();
 }
 ;
 

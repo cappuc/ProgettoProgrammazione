@@ -3,9 +3,7 @@
  */
 
 #include "Nodo.hpp"
-#include <iostream>
-#include <stdlib.h>
-#include <cstring>
+#include "Utility.hpp"
 
 using namespace std;
 
@@ -32,37 +30,37 @@ int Nodo::getCordY() {
 }
 
 Nodo* Nodo::goNord() {
-	if (this->nord != 0) {
+	if (this->nord != NULL) {
 		return this->nord;
 	} else {
-		this->nord = new Nodo(this->x, this->y - 1, 0, this, 0, 0);
+		this->nord = new Nodo(this->x, this->y - 1, NULL, this, NULL, NULL);
 		return this->nord;
 	}
 }
 
 Nodo* Nodo::goSud() {
-	if (this->sud != 0) {
+	if (this->sud != NULL) {
 		return this->sud;
 	} else {
-		this->sud = new Nodo(this->x, this->y + 1, this, 0, 0, 0);
+		this->sud = new Nodo(this->x, this->y + 1, this, NULL, NULL, NULL);
 		return this->sud;
 	}
 }
 
 Nodo* Nodo::goOvest() {
-	if (this->ovest != 0) {
+	if (this->ovest != NULL) {
 		return this->ovest;
 	} else {
-		this->ovest = new Nodo(this->x - 1, this->y, 0, 0, 0, this);
+		this->ovest = new Nodo(this->x - 1, this->y, NULL, NULL, NULL, this);
 		return this->ovest;
 	}
 }
 
 Nodo* Nodo::goEst() {
-	if (this->est != 0) {
+	if (this->est != NULL) {
 		return this->est;
 	} else {
-		this->est = new Nodo(this->x + 1, this->y, 0, 0, this, 0);
+		this->est = new Nodo(this->x + 1, this->y, NULL, NULL, this, NULL);
 		return this->est;
 	}
 }

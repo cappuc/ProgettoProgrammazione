@@ -154,4 +154,8 @@ local.properties
 *.exe
 *.out
 *.app
-/Debug/
+
+Debug/
+Linux/
+Default/
+Windows/

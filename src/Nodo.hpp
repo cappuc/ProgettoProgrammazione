@@ -8,14 +8,15 @@
 #ifndef NODO_HPP_
 #define NODO_HPP_
 
+#include "Utility.hpp"
 #include "Giocatore.hpp"
 
-class Nodo {
+struct StructGiocatori {
+	Giocatore* giocatore;
+	StructGiocatori* next;
+};
 
-	struct StructGiocatori {
-		Giocatore* giocatore;
-		StructGiocatori* next;
-	};
+class Nodo {
 
 private:
 	Nodo *nord, *sud, *ovest, *est;
