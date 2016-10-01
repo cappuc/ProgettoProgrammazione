@@ -12,8 +12,8 @@
 #include "Giocatore.hpp"
 
 struct StructGiocatori {
-	Giocatore* giocatore;
-	StructGiocatori* next;
+	Giocatore *giocatore;
+	StructGiocatori *next;
 };
 
 class Nodo {
@@ -35,6 +35,10 @@ public:
 	Nodo* getSud();
 	Nodo* getOvest();
 	Nodo* getEst();
+	void linkNord(Nodo *n);
+	void linkSud(Nodo *n);
+	void linkOvest(Nodo *n);
+	void linkEst(Nodo *n);
 	void addGiocatore(Giocatore *g);
 	void removeGiocatore(Giocatore *g);
 	bool giocatorePresente(Giocatore *g);

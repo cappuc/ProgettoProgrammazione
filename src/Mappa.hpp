@@ -17,8 +17,11 @@ class Mappa {
 
 private:
 	Nodo *nodoIniziale;
+	Visitati *nodiVisitati;
 	void setNodoVisitato(Nodo *n);
-	Nodo findNodoCord(int x, int y);
+	Nodo* findNodoCord(int x, int y);
+	void addNodoVisitato(Nodo *n);
+	Nodo* nuovoNodo(int x, int y);
 
 public:
 	Mappa();

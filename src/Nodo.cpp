@@ -78,6 +78,22 @@ Nodo* Nodo::getEst() {
 	return this->est;
 }
 
+void Nodo::linkNord(Nodo *n) {
+	this->nord = n;
+}
+
+void Nodo::linkSud(Nodo *n) {
+	this->sud = n;
+}
+
+void Nodo::linkOvest(Nodo *n) {
+	this->ovest = n;
+}
+
+void Nodo::linkEst(Nodo *n) {
+	this->est = n;
+}
+
 void Nodo::addGiocatore(Giocatore *g) {
 	StructGiocatori* nuovoGiocatore = new StructGiocatori;
 	nuovoGiocatore->giocatore = g;
