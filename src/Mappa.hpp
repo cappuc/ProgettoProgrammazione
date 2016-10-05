@@ -22,10 +22,12 @@ private:
 	Nodo* findNodoCord(int x, int y);
 	void addNodoVisitato(Nodo *n);
 	Nodo* nuovoNodo(int x, int y);
+	int getMinX();
+	int getMinY();
 
 public:
 	Mappa();
-	void stampaMappa(Nodo *n, Visitati *v);
+	void stampaMappa();
 };
 
 #endif /* MAPPA_HPP_ */

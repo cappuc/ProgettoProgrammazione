@@ -27,10 +27,6 @@ public:
 	Nodo(int xx, int yy, Nodo *n, Nodo *s, Nodo *o, Nodo *e);
 	int getCordX();
 	int getCordY();
-	Nodo* goNord();
-	Nodo* goSud();
-	Nodo* goOvest();
-	Nodo* goEst();
 	Nodo* getNord();
 	Nodo* getSud();
 	Nodo* getOvest();

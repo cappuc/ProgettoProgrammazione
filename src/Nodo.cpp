@@ -29,42 +29,6 @@ int Nodo::getCordY() {
 	return this->y;
 }
 
-Nodo* Nodo::goNord() {
-	if (this->nord != NULL) {
-		return this->nord;
-	} else {
-		this->nord = new Nodo(this->x, this->y - 1, NULL, this, NULL, NULL);
-		return this->nord;
-	}
-}
-
-Nodo* Nodo::goSud() {
-	if (this->sud != NULL) {
-		return this->sud;
-	} else {
-		this->sud = new Nodo(this->x, this->y + 1, this, NULL, NULL, NULL);
-		return this->sud;
-	}
-}
-
-Nodo* Nodo::goOvest() {
-	if (this->ovest != NULL) {
-		return this->ovest;
-	} else {
-		this->ovest = new Nodo(this->x - 1, this->y, NULL, NULL, NULL, this);
-		return this->ovest;
-	}
-}
-
-Nodo* Nodo::goEst() {
-	if (this->est != NULL) {
-		return this->est;
-	} else {
-		this->est = new Nodo(this->x + 1, this->y, NULL, NULL, this, NULL);
-		return this->est;
-	}
-}
-
 Nodo* Nodo::getNord() {
 	return this->nord;
 }

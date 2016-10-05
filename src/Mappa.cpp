@@ -9,21 +9,28 @@ using namespace std;
 
 Mappa::Mappa() {
 	nodiVisitati = NULL;
-	printf("Ciao sono la Mappa!\n");
+	//printf("Ciao sono la Mappa!\n");
 	this->nodoIniziale = new Nodo(0, 0, 0, 0, 0, 0);
 	this->addNodoVisitato(this->nodoIniziale);
-	Nodo *nn = this->findNodoCord(0, 0);
-	cout << nn->getCordX() << endl;
+	//Nodo *nn = this->findNodoCord(0, 0);
+	//cout << nn->getCordX() << endl;
 
 //	this->nodoIniziale->goNord()->goOvest();
 //	this->nodoIniziale->goEst()->goSud();
 
 //	stampaMappa(this->nodoIniziale, 0);
 
-	Giocatore* g = new Giocatore("Fabio", 1, this->nodoIniziale);
-	this->nodoIniziale->addGiocatore(g);
-	this->nodoIniziale->stampaGiocatori();
+	//Giocatore* g = new Giocatore("Fabio", 1, this->nodoIniziale);
+	//this->nodoIniziale->addGiocatore(g);
+	//this->nodoIniziale->stampaGiocatori();
 //	cout << g->getPosizione()->getCordY();
+
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 4; j++) {
+			this->addNodoVisitato(this->nuovoNodo(i, j));
+		}
+	}
+	this->stampaMappa();
 }
 
 /**
@@ -43,8 +50,12 @@ Nodo* Mappa::findNodoCord(int x, int y) {
 	return NULL;
 }
 
+/**
+ * Aggiunge un nodo alla lista dei nodi visitati controllando che sia diverso da NULL e che non sia gia presente
+ * @param n Nodo da inserire
+ */
 void Mappa::addNodoVisitato(Nodo *n) {
-	if (n != NULL) {
+	if (n != NULL && !this->findNodoCord(n->getCordX(), n->getCordY())) {
 		Visitati *nuovoNodo = new Visitati;
 		nuovoNodo->nodo = n;
 		nuovoNodo->next = this->nodiVisitati;
@@ -59,6 +70,12 @@ void Mappa::addNodoVisitato(Nodo *n) {
  * @return newNodo se esiste almeno un nodo vicino, NULL altrimenti
  */
 Nodo* Mappa::nuovoNodo(int x, int y) {
+
+	Nodo* n = this->findNodoCord(x, y);
+	if (n != NULL) {
+		return n;
+	}
+
 	Nodo *nord = this->findNodoCord(x, y - 1);
 	Nodo *sud = this->findNodoCord(x, y + 1);
 	Nodo *ovest = this->findNodoCord(x - 1, y);
@@ -86,29 +103,47 @@ Nodo* Mappa::nuovoNodo(int x, int y) {
 	return newNodo;
 }
 
-void Mappa::stampaMappa(Nodo *n, Visitati *v) {
-	if (n == 0) {
-		return;
-	} else {
-		Visitati *pos = v;
-		bool visit = false;
-		while (pos != 0) {
-			if (pos->nodo == n) {
-				visit = true;
-			}
-			pos = pos->next;
-		}
-		if (!visit) {
-			printf("x: %d - y: %d\n", n->getCordX(), n->getCordY());
-			pos = new Visitati;
-			pos->nodo = n;
-			pos->next = v;
-			v = pos;
-			stampaMappa(n->getNord(), v);
-			stampaMappa(n->getSud(), v);
-			stampaMappa(n->getOvest(), v);
-			stampaMappa(n->getEst(), v);
-		}
+void Mappa::stampaMappa() {
+	Visitati *v1 = this->nodiVisitati;
+	int minX = this->getMinX();
+	int minY = this->getMinY();
+	printf("minX: %d - minY: %d\n", minX, minY);
+	while (v1 != NULL) {
+		printf("[%d:%d]\n", v1->nodo->getCordX(), v1->nodo->getCordY());
+		v1 = v1->next;
 	}
 }
+
+/**
+ * Restituisce la coordinata minima di x
+ * @return minX
+ */
+int Mappa::getMinX() {
+	Visitati *v = this->nodiVisitati;
+	int minX = 0;
+	while (v != NULL) {
+		minX = (v->nodo->getCordX() < minX) ? v->nodo->getCordX() : minX;
+		v = v->next;
+	}
+	return minX;
+}
+
+/**
+ * Restituisce la coordinata minima di Y
+ * @return minY
+ */
+int Mappa::getMinY() {
+	Visitati *v = this->nodiVisitati;
+	int minY = 0;
+	while (v != NULL) {
+		minY = (v->nodo->getCordY() < minY) ? v->nodo->getCordY() : minY;
+		v = v->next;
+	}
+	return minY;
+}
+
+
+
+
+
 
