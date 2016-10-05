@@ -74,3 +74,7 @@ void Nodo::stampaGiocatori() {
 	}
 }
 
+StructGiocatori* Nodo::getGiocatori() {
+	return this->giocatori;
+}
+

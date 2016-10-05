@@ -39,6 +39,7 @@ public:
 	void removeGiocatore(Giocatore *g);
 	bool giocatorePresente(Giocatore *g);
 	void stampaGiocatori();
+	StructGiocatori* getGiocatori();
 
 };
 

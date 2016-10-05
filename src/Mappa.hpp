@@ -24,6 +24,8 @@ private:
 	Nodo* nuovoNodo(int x, int y);
 	int getMinX();
 	int getMinY();
+	int getMaxX();
+	int getMaxY();
 
 public:
 	Mappa();

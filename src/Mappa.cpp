@@ -27,9 +27,16 @@ Mappa::Mappa() {
 
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
-			this->addNodoVisitato(this->nuovoNodo(i, j));
+			if (i != 1 && j != 1)
+				this->addNodoVisitato(this->nuovoNodo(i, j));
 		}
 	}
+
+	Giocatore* g = new Giocatore("Fabio", 1, this->findNodoCord(2, 3));
+	Giocatore* g1 = new Giocatore("Fabio", 2, this->findNodoCord(2, 3));
+	this->findNodoCord(2, 3)->addGiocatore(g);
+	this->findNodoCord(2, 3)->addGiocatore(g1);
+
 	this->stampaMappa();
 }
 
@@ -81,9 +88,9 @@ Nodo* Mappa::nuovoNodo(int x, int y) {
 	Nodo *ovest = this->findNodoCord(x - 1, y);
 	Nodo *est = this->findNodoCord(x + 1, y);
 
-	if (nord == NULL && sud == NULL && ovest == NULL && est == NULL) {
-		return NULL;
-	}
+//	if (nord == NULL && sud == NULL && ovest == NULL && est == NULL) {
+//		return NULL;
+//	}
 
 	Nodo *newNodo = new Nodo(x, y, nord, sud, ovest, est);
 
@@ -103,14 +110,46 @@ Nodo* Mappa::nuovoNodo(int x, int y) {
 	return newNodo;
 }
 
+/**
+ * Stampa la mappa
+ * (Da fare in modo più efficente)
+ */
 void Mappa::stampaMappa() {
-	Visitati *v1 = this->nodiVisitati;
 	int minX = this->getMinX();
 	int minY = this->getMinY();
-	printf("minX: %d - minY: %d\n", minX, minY);
-	while (v1 != NULL) {
-		printf("[%d:%d]\n", v1->nodo->getCordX(), v1->nodo->getCordY());
-		v1 = v1->next;
+	int maxX = this->getMaxX();
+	int maxY = this->getMaxY();
+
+	for (int y = minY; y <= maxY; y++) {
+		for (int x = minX; x <= maxX; x++) {
+			Visitati *v1 = this->nodiVisitati;
+			bool trovato = false;
+			while (v1 != NULL && !trovato) {
+				if (v1->nodo->getCordX() == x && v1->nodo->getCordY() == y) {
+					trovato = true;
+					StructGiocatori *gioc = v1->nodo->getGiocatori();
+					//printf("[%d:%d;%s]\t", x, y);
+					cout << "[" << x << ":" << y;
+					int count = 0;
+					while (gioc != NULL) {
+						count++;
+						cout << ";" << gioc->giocatore->getId();
+						gioc = gioc->next;
+					}
+					cout << "]";
+					int space = 10;
+					space = space - 2 * count;
+					for (int i=0; i<space; i++) {
+						cout << " ";
+					}
+				}
+				v1 = v1->next;
+			}
+			if (!trovato) {
+				cout << "\t";
+			}
+		}
+		cout << endl;
 	}
 }
 
@@ -142,8 +181,31 @@ int Mappa::getMinY() {
 	return minY;
 }
 
+/**
+ * Restituisce la coordinata minima di x
+ * @return minX
+ */
+int Mappa::getMaxX() {
+	Visitati *v = this->nodiVisitati;
+	int maxX = 0;
+	while (v != NULL) {
+		maxX = (v->nodo->getCordX() > maxX) ? v->nodo->getCordX() : maxX;
+		v = v->next;
+	}
+	return maxX;
+}
 
-
-
-
+/**
+ * Restituisce la coordinata minima di Y
+ * @return minY
+ */
+int Mappa::getMaxY() {
+	Visitati *v = this->nodiVisitati;
+	int maxY = 0;
+	while (v != NULL) {
+		maxY = (v->nodo->getCordY() > maxY) ? v->nodo->getCordY() : maxY;
+		v = v->next;
+	}
+	return maxY;
+}
 
