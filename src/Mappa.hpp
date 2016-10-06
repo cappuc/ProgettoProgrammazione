@@ -18,14 +18,11 @@ class Mappa {
 private:
 	Nodo *nodoIniziale;
 	Visitati *nodiVisitati;
+	int minX, maxX, minY, maxY;
 	void setNodoVisitato(Nodo *n);
 	Nodo* findNodoCord(int x, int y);
 	void addNodoVisitato(Nodo *n);
 	Nodo* nuovoNodo(int x, int y);
-	int getMinX();
-	int getMinY();
-	int getMaxX();
-	int getMaxY();
 
 public:
 	Mappa();

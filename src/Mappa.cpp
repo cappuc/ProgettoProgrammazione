@@ -8,6 +8,7 @@
 using namespace std;
 
 Mappa::Mappa() {
+	minX = minY = maxX = maxY = 0;
 	nodiVisitati = NULL;
 	//printf("Ciao sono la Mappa!\n");
 	this->nodoIniziale = new Nodo(0, 0, 0, 0, 0, 0);
@@ -25,10 +26,9 @@ Mappa::Mappa() {
 	//this->nodoIniziale->stampaGiocatori();
 //	cout << g->getPosizione()->getCordY();
 
-	for (int i = 0; i < 4; i++) {
-		for (int j = 0; j < 4; j++) {
-			if (i != 1 && j != 1)
-				this->addNodoVisitato(this->nuovoNodo(i, j));
+	for (int i = -10; i < 11; i++) {
+		for (int j = -10; j < 4; j++) {
+			this->addNodoVisitato(this->nuovoNodo(i, j));
 		}
 	}
 
@@ -107,6 +107,11 @@ Nodo* Mappa::nuovoNodo(int x, int y) {
 		est->linkOvest(newNodo);
 	}
 
+	this->minX = (this->minX > x) ? x : this->minX;
+	this->minY = (this->minY > y) ? y : this->minY;
+	this->maxX = (this->maxX < x) ? x : this->maxX;
+	this->maxY = (this->maxY < y) ? y : this->maxY;
+
 	return newNodo;
 }
 
@@ -115,13 +120,8 @@ Nodo* Mappa::nuovoNodo(int x, int y) {
  * (Da fare in modo più efficente)
  */
 void Mappa::stampaMappa() {
-	int minX = this->getMinX();
-	int minY = this->getMinY();
-	int maxX = this->getMaxX();
-	int maxY = this->getMaxY();
-
-	for (int y = minY; y <= maxY; y++) {
-		for (int x = minX; x <= maxX; x++) {
+	for (int y = this->minY; y <= this->maxY; y++) {
+		for (int x = this->minX; x <= this->maxX; x++) {
 			Visitati *v1 = this->nodiVisitati;
 			bool trovato = false;
 			while (v1 != NULL && !trovato) {
@@ -129,7 +129,7 @@ void Mappa::stampaMappa() {
 					trovato = true;
 					StructGiocatori *gioc = v1->nodo->getGiocatori();
 					//printf("[%d:%d;%s]\t", x, y);
-					cout << "[" << x << ":" << y;
+					cout << "[" << (x >= 0 && x<10 ? " " : "") << x << ":" << (y >= 0 && y<10 ? " " : "") << y;
 					int count = 0;
 					while (gioc != NULL) {
 						count++;
@@ -139,7 +139,7 @@ void Mappa::stampaMappa() {
 					cout << "]";
 					int space = 10;
 					space = space - 2 * count;
-					for (int i=0; i<space; i++) {
+					for (int i = 0; i < space; i++) {
 						cout << " ";
 					}
 				}
@@ -152,60 +152,3 @@ void Mappa::stampaMappa() {
 		cout << endl;
 	}
 }
-
-/**
- * Restituisce la coordinata minima di x
- * @return minX
- */
-int Mappa::getMinX() {
-	Visitati *v = this->nodiVisitati;
-	int minX = 0;
-	while (v != NULL) {
-		minX = (v->nodo->getCordX() < minX) ? v->nodo->getCordX() : minX;
-		v = v->next;
-	}
-	return minX;
-}
-
-/**
- * Restituisce la coordinata minima di Y
- * @return minY
- */
-int Mappa::getMinY() {
-	Visitati *v = this->nodiVisitati;
-	int minY = 0;
-	while (v != NULL) {
-		minY = (v->nodo->getCordY() < minY) ? v->nodo->getCordY() : minY;
-		v = v->next;
-	}
-	return minY;
-}
-
-/**
- * Restituisce la coordinata minima di x
- * @return minX
- */
-int Mappa::getMaxX() {
-	Visitati *v = this->nodiVisitati;
-	int maxX = 0;
-	while (v != NULL) {
-		maxX = (v->nodo->getCordX() > maxX) ? v->nodo->getCordX() : maxX;
-		v = v->next;
-	}
-	return maxX;
-}
-
-/**
- * Restituisce la coordinata minima di Y
- * @return minY
- */
-int Mappa::getMaxY() {
-	Visitati *v = this->nodiVisitati;
-	int maxY = 0;
-	while (v != NULL) {
-		maxY = (v->nodo->getCordY() > maxY) ? v->nodo->getCordY() : maxY;
-		v = v->next;
-	}
-	return maxY;
-}
-
