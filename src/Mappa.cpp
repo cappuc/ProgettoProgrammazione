@@ -10,6 +10,7 @@ using namespace std;
 Mappa::Mappa() {
 	minX = minY = maxX = maxY = 0;
 	nodiVisitati = NULL;
+	space_number = 10;
 	//printf("Ciao sono la Mappa!\n");
 	this->nodoIniziale = new Nodo(0, 0, 0, 0, 0, 0);
 	this->addNodoVisitato(this->nodoIniziale);
@@ -28,7 +29,8 @@ Mappa::Mappa() {
 
 	for (int i = -10; i < 11; i++) {
 		for (int j = -10; j < 4; j++) {
-			this->addNodoVisitato(this->nuovoNodo(i, j));
+			if (!(i == 1 && j == -1))
+				this->addNodoVisitato(this->nuovoNodo(i, j));
 		}
 	}
 
@@ -127,28 +129,62 @@ void Mappa::stampaMappa() {
 			while (v1 != NULL && !trovato) {
 				if (v1->nodo->getCordX() == x && v1->nodo->getCordY() == y) {
 					trovato = true;
-					StructGiocatori *gioc = v1->nodo->getGiocatori();
-					//printf("[%d:%d;%s]\t", x, y);
-					cout << "[" << (x >= 0 && x<10 ? " " : "") << x << ":" << (y >= 0 && y<10 ? " " : "") << y;
-					int count = 0;
-					while (gioc != NULL) {
-						count++;
-						cout << ";" << gioc->giocatore->getId();
-						gioc = gioc->next;
-					}
-					cout << "]";
-					int space = 10;
-					space = space - 2 * count;
-					for (int i = 0; i < space; i++) {
-						cout << " ";
-					}
+					this->stampaNodo(x, y, v1->nodo->getGiocatori());
 				}
 				v1 = v1->next;
 			}
 			if (!trovato) {
-				cout << "\t";
+				int cx_space = (minX < -9) ? 3 : 2;
+				int cy_space = (minY < -9) ? 3 : 2;
+				int space = cx_space + cy_space + 3 + this->space_number;
+
+				for (int i = 0; i < space; i++) {
+					cout << " ";
+				}
 			}
 		}
 		cout << endl;
 	}
 }
+
+void Mappa::stampaNodo(int x, int y, StructGiocatori *g) {
+	int cx_space = (minX < -9) ? 3 : 2;
+	int cy_space = (minY < -9) ? 3 : 2;
+
+	cout << "[";
+
+	if (x >= 0 && x < 10) {
+		for (int i = 0; i < cx_space - 1; i++)
+			cout << " ";
+	} else if (x > 10 || (x < 0 && x > -10)) {
+		for (int i = 0; i < cx_space - 2; i++)
+			cout << " ";
+	}
+
+	cout << x;
+	cout << ":";
+
+	if (y >= 0 && y < 10) {
+		for (int i = 0; i < cy_space - 1; i++)
+			cout << " ";
+	} else if (y > 10 || (y < 0 && y > -10)) {
+		for (int i = 0; i < cy_space - 2; i++)
+			cout << " ";
+	}
+
+	cout << y;
+
+	int count = 0;
+	while (g != NULL) {
+		count++;
+		cout << ";" << g->giocatore->getId();
+		g = g->next;
+	}
+
+	cout << "]";
+
+	for (int i = 0; i < this->space_number - 2 * count; i++) {
+		cout << " ";
+	}
+}
+
