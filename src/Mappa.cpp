@@ -11,9 +11,10 @@ Mappa::Mappa() {
 	minX = minY = maxX = maxY = 0;
 	nodiVisitati = NULL;
 	space_number = 10;
-	//printf("Ciao sono la Mappa!\n");
 	this->nodoIniziale = new Nodo(0, 0, 0, 0, 0, 0);
 	this->addNodoVisitato(this->nodoIniziale);
+
+
 	//Nodo *nn = this->findNodoCord(0, 0);
 	//cout << nn->getCordX() << endl;
 
@@ -119,7 +120,6 @@ Nodo* Mappa::nuovoNodo(int x, int y) {
 
 /**
  * Stampa la mappa
- * (Da fare in modo più efficente)
  */
 void Mappa::stampaMappa() {
 	for (int y = this->minY; y <= this->maxY; y++) {
@@ -147,6 +147,12 @@ void Mappa::stampaMappa() {
 	}
 }
 
+/**
+ * Stampa un nodo
+ * @param x Coordinata x
+ * @param y Coordinata y
+ * @param g Lista dei giocatori presenti nel nodo
+ */
 void Mappa::stampaNodo(int x, int y, StructGiocatori *g) {
 	int cx_space = (minX < -9) ? 3 : 2;
 	int cy_space = (minY < -9) ? 3 : 2;
