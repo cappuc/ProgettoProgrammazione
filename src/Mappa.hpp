@@ -28,6 +28,7 @@ private:
 
 public:
 	Mappa();
+	Nodo* getNodoIniziale();
 	void stampaMappa();
 };
 

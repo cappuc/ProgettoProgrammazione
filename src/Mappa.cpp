@@ -14,7 +14,6 @@ Mappa::Mappa() {
 	this->nodoIniziale = new Nodo(0, 0, 0, 0, 0, 0);
 	this->addNodoVisitato(this->nodoIniziale);
 
-
 	//Nodo *nn = this->findNodoCord(0, 0);
 	//cout << nn->getCordX() << endl;
 
@@ -28,19 +27,19 @@ Mappa::Mappa() {
 	//this->nodoIniziale->stampaGiocatori();
 //	cout << g->getPosizione()->getCordY();
 
-	for (int i = -10; i < 11; i++) {
-		for (int j = -10; j < 4; j++) {
-			if (!(i == 1 && j == -1))
-				this->addNodoVisitato(this->nuovoNodo(i, j));
-		}
-	}
-
-	Giocatore* g = new Giocatore("Fabio", 1, this->findNodoCord(2, 3));
-	Giocatore* g1 = new Giocatore("Fabio", 2, this->findNodoCord(2, 3));
-	this->findNodoCord(2, 3)->addGiocatore(g);
-	this->findNodoCord(2, 3)->addGiocatore(g1);
-
-	this->stampaMappa();
+//	for (int i = -10; i < 11; i++) {
+//		for (int j = -10; j < 4; j++) {
+//			if (!(i == 1 && j == -1))
+//				this->addNodoVisitato(this->nuovoNodo(i, j));
+//		}
+//	}
+//
+//	Giocatore* g = new Giocatore("Fabio", 1, this->findNodoCord(2, 3));
+//	Giocatore* g1 = new Giocatore("Fabio", 2, this->findNodoCord(2, 3));
+//	this->findNodoCord(2, 3)->addGiocatore(g);
+//	this->findNodoCord(2, 3)->addGiocatore(g1);
+//
+//	this->stampaMappa();
 }
 
 /**
@@ -192,5 +191,9 @@ void Mappa::stampaNodo(int x, int y, StructGiocatori *g) {
 	for (int i = 0; i < this->space_number - 2 * count; i++) {
 		cout << " ";
 	}
+}
+
+Nodo* Mappa::getNodoIniziale() {
+	return this->nodoIniziale;
 }
 

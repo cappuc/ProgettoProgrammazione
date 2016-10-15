@@ -11,11 +11,6 @@
 #include "Utility.hpp"
 #include "Giocatore.hpp"
 
-struct StructGiocatori {
-	Giocatore *giocatore;
-	StructGiocatori *next;
-};
-
 class Nodo {
 
 private:

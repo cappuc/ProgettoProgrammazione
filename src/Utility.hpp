@@ -11,10 +11,4 @@
 
 #define STRING_LENGTH 50
 
-class Utility {
-
-};
-
-
-
 #endif /* UTILITY_HPP_ */
