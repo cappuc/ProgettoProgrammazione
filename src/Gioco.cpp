@@ -9,6 +9,7 @@ using namespace std;
 Gioco::Gioco() {
 	giocatoriHead = giocatoriTail = NULL;
 	mappa = new Mappa();
+	turno = 0;
 }
 
 void Gioco::configuraPartita() {
@@ -21,7 +22,8 @@ void Gioco::configuraPartita() {
 		cout << "Nome giocatore: ";
 		cin >> nome;
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
-		Giocatore *g = new Giocatore(nome, id_gioc, this->mappa->getNodoIniziale());
+		Giocatore *g = new Giocatore(nome, id_gioc++, this->mappa->getNodoIniziale());
+		this->aggiungiGiocatore(g);
 		this->mappa->getNodoIniziale()->addGiocatore(g);
 		do {
 			cout << "Vuoi inserire altri giocatori? [s/n] ";
@@ -32,7 +34,17 @@ void Gioco::configuraPartita() {
 }
 
 void Gioco::iniziaPartita() {
+	StructGiocatori *currentGiocatore = this->giocatoriHead;
+	this->mappa->stampaMappa();
 
+	do {
+		cout << "Turno [" << turno << "] di: " << currentGiocatore->giocatore->getNome() << endl;
+
+		this->mappa->stampaMappa();
+
+		currentGiocatore = currentGiocatore->next;
+		if (currentGiocatore == this->giocatoriHead) turno++;
+	} while (turno < 10);
 }
 
 void Gioco::aggiungiGiocatore(Giocatore *g) {

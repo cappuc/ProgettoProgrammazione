@@ -11,4 +11,10 @@
 
 #define STRING_LENGTH 50
 
+class Giocatore;
+struct StructGiocatori {
+	Giocatore *giocatore;
+	StructGiocatori *next;
+};
+
 #endif /* UTILITY_HPP_ */

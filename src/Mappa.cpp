@@ -64,12 +64,12 @@ Nodo* Mappa::findNodoCord(int x, int y) {
  * @param n Nodo da inserire
  */
 void Mappa::addNodoVisitato(Nodo *n) {
-	if (n != NULL && !this->findNodoCord(n->getCordX(), n->getCordY())) {
-		Visitati *nuovoNodo = new Visitati;
-		nuovoNodo->nodo = n;
-		nuovoNodo->next = this->nodiVisitati;
-		this->nodiVisitati = nuovoNodo;
-	}
+	//if (n != NULL && !this->findNodoCord(n->getCordX(), n->getCordY())) {
+	Visitati *nuovoNodo = new Visitati;
+	nuovoNodo->nodo = n;
+	nuovoNodo->next = this->nodiVisitati;
+	this->nodiVisitati = nuovoNodo;
+	//}
 }
 
 /**
@@ -113,6 +113,8 @@ Nodo* Mappa::nuovoNodo(int x, int y) {
 	this->minY = (this->minY > y) ? y : this->minY;
 	this->maxX = (this->maxX < x) ? x : this->maxX;
 	this->maxY = (this->maxY < y) ? y : this->maxY;
+
+	this->addNodoVisitato(newNodo);
 
 	return newNodo;
 }

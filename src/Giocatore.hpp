@@ -24,9 +24,4 @@ public:
 	Nodo* getPosizione();
 };
 
-struct StructGiocatori {
-	Giocatore *giocatore;
-	StructGiocatori *next;
-};
-
 #endif /* GIOCATORE_HPP_ */

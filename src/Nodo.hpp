@@ -9,7 +9,8 @@
 #define NODO_HPP_
 
 #include "Utility.hpp"
-#include "Giocatore.hpp"
+
+class Giocatore;
 
 class Nodo {
 

@@ -14,6 +14,7 @@ class Gioco {
 private:
 	StructGiocatori *giocatoriHead, *giocatoriTail;
 	Mappa *mappa;
+	int turno;
 	void aggiungiGiocatore(Giocatore *g);
 
 public:
