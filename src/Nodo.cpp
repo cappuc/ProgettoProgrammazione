@@ -111,16 +111,29 @@ void Nodo::addGiocatore(Giocatore *g) {
 	this->giocatori = nuovoGiocatore;
 }
 
+/**
+ * Rimuove un giocatore dal nodo
+ * @param g Giocatore
+ */
 void Nodo::removeGiocatore(Giocatore *g) {
 	StructGiocatori *gioc = this->giocatori;
 	StructGiocatori *prec = NULL;
-	while (gioc != NULL || gioc->giocatore == g) {
-		prec = gioc;
-		gioc = gioc->next;
-	}
 	if (gioc != NULL) {
-		prec->next = gioc->next;
-		delete gioc;
+		if (gioc->giocatore == g) {
+			this->giocatori = gioc->next;
+			delete gioc;
+		} else {
+			prec = gioc;
+			gioc = gioc->next;
+			while (gioc != NULL && gioc->giocatore != g) {
+				prec = gioc;
+				gioc = gioc->next;
+			}
+			if (gioc != NULL) {
+				prec->next = gioc->next;
+				delete gioc;
+			}
+		}
 	}
 }
 

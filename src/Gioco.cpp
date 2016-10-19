@@ -12,6 +12,9 @@ Gioco::Gioco() {
 	turno = 0;
 }
 
+/**
+ * Configura la partita
+ */
 void Gioco::configuraPartita() {
 	char control;
 	char nome[STRING_LENGTH];
@@ -33,6 +36,9 @@ void Gioco::configuraPartita() {
 	} while (control != 'n');
 }
 
+/**
+ * Inizia la partita
+ */
 void Gioco::iniziaPartita() {
 	char dir;
 
@@ -44,7 +50,7 @@ void Gioco::iniziaPartita() {
 
 		do {
 			dir = ' ';
-			cout << "In che direzione vuoi muoverti? [w/a/s/d]";
+			cout << "In che direzione vuoi muoverti? [w/a/s/d] ";
 			cin >> dir;
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		} while (dir != 'w' && dir != 'a' && dir != 's' && dir != 'd');
@@ -58,12 +64,18 @@ void Gioco::iniziaPartita() {
 	} while (turno < 10);
 }
 
+/**
+ * Aggiunge un giocatore alla partita
+ * Inserimento in coda - lista circolare
+ * @param g Giocatore
+ */
 void Gioco::aggiungiGiocatore(Giocatore *g) {
 	StructGiocatori *newGioc = new StructGiocatori;
 	newGioc->giocatore = g;
 	newGioc->next = this->giocatoriHead;
 
 	if (this->giocatoriHead == NULL && this->giocatoriTail == NULL) {
+		newGioc->next = newGioc;
 		this->giocatoriHead = this->giocatoriTail = newGioc;
 	} else {
 		this->giocatoriTail->next = newGioc;

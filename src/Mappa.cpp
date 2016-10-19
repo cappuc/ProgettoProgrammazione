@@ -220,8 +220,7 @@ void Mappa::moveGiocatore(Giocatore *g, char dir) {
 		newNodo = this->nuovoNodo(oldNode->getCordX() + 1, oldNode->getCordY());
 		break;
 	}
-
-	oldNode->removeGiocatore(g);
+	//oldNode->removeGiocatore(g);
 
 	g->setPosizione(newNodo);
 }

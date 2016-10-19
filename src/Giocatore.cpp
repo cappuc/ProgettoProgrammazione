@@ -20,7 +20,9 @@ int Giocatore::getId() {
 }
 
 void Giocatore::setPosizione(Nodo* n) {
+	this->posizione->removeGiocatore(this);
 	this->posizione = n;
+	this->posizione->addGiocatore(this);
 }
 
 Nodo* Giocatore::getPosizione() {
