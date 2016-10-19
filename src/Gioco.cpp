@@ -34,11 +34,22 @@ void Gioco::configuraPartita() {
 }
 
 void Gioco::iniziaPartita() {
+	char dir;
+
 	StructGiocatori *currentGiocatore = this->giocatoriHead;
 	this->mappa->stampaMappa();
 
 	do {
 		cout << "Turno [" << turno << "] di: " << currentGiocatore->giocatore->getNome() << endl;
+
+		do {
+			dir = ' ';
+			cout << "In che direzione vuoi muoverti? [w/a/s/d]";
+			cin >> dir;
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		} while (dir != 'w' && dir != 'a' && dir != 's' && dir != 'd');
+
+		this->mappa->moveGiocatore(currentGiocatore->giocatore, dir);
 
 		this->mappa->stampaMappa();
 

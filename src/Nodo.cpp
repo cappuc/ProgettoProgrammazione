@@ -111,6 +111,19 @@ void Nodo::addGiocatore(Giocatore *g) {
 	this->giocatori = nuovoGiocatore;
 }
 
+void Nodo::removeGiocatore(Giocatore *g) {
+	StructGiocatori *gioc = this->giocatori;
+	StructGiocatori *prec = NULL;
+	while (gioc != NULL || gioc->giocatore == g) {
+		prec = gioc;
+		gioc = gioc->next;
+	}
+	if (gioc != NULL) {
+		prec->next = gioc->next;
+		delete gioc;
+	}
+}
+
 /**
  * Restituisce la lista dei giocatori
  * @return lista giocatori

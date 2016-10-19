@@ -5,6 +5,7 @@
 #ifndef GIOCO_HPP_
 #define GIOCO_HPP_
 
+#include <limits>
 #include "Utility.hpp"
 #include "Mappa.hpp"
 #include "Nodo.hpp"

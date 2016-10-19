@@ -5,10 +5,10 @@
 #ifndef GIOCATORE_HPP_
 #define GIOCATORE_HPP_
 
-#include "Utility.hpp"
 #include <string.h>
 
-class Nodo;
+#include "Utility.hpp"
+#include "Nodo.hpp"
 
 class Giocatore {
 private:

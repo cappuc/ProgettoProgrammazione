@@ -30,6 +30,7 @@ public:
 	Mappa();
 	Nodo* getNodoIniziale();
 	void stampaMappa();
+	void moveGiocatore(Giocatore *g, char dir);
 };
 
 #endif /* MAPPA_HPP_ */

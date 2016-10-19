@@ -90,9 +90,9 @@ Nodo* Mappa::nuovoNodo(int x, int y) {
 	Nodo *ovest = this->findNodoCord(x - 1, y);
 	Nodo *est = this->findNodoCord(x + 1, y);
 
-//	if (nord == NULL && sud == NULL && ovest == NULL && est == NULL) {
-//		return NULL;
-//	}
+	if (nord == NULL && sud == NULL && ovest == NULL && est == NULL) {
+		return NULL;
+	}
 
 	Nodo *newNodo = new Nodo(x, y, nord, sud, ovest, est);
 
@@ -197,5 +197,32 @@ void Mappa::stampaNodo(int x, int y, StructGiocatori *g) {
 
 Nodo* Mappa::getNodoIniziale() {
 	return this->nodoIniziale;
+}
+
+void Mappa::moveGiocatore(Giocatore *g, char dir) {
+	Nodo *oldNode = g->getPosizione();
+	Nodo *newNodo = NULL;
+
+	switch (dir) {
+	case 'w':
+		newNodo = this->nuovoNodo(oldNode->getCordX(), oldNode->getCordY() - 1);
+		break;
+
+	case 'a':
+		newNodo = this->nuovoNodo(oldNode->getCordX() - 1, oldNode->getCordY());
+		break;
+
+	case 's':
+		newNodo = this->nuovoNodo(oldNode->getCordX(), oldNode->getCordY() + 1);
+		break;
+
+	case 'd':
+		newNodo = this->nuovoNodo(oldNode->getCordX() + 1, oldNode->getCordY());
+		break;
+	}
+
+	oldNode->removeGiocatore(g);
+
+	g->setPosizione(newNodo);
 }
 
