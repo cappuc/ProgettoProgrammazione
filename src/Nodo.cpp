@@ -3,21 +3,31 @@
  */
 
 #include "Nodo.hpp"
-#include "Utility.hpp"
 
 using namespace std;
 
-Nodo::Nodo(int xx, int yy, Nodo *n, Nodo *s, Nodo *o, Nodo *e) {
+/**
+ * Inizializza il nodo
+ * @param x Coordinata x
+ * @param y Coordinata y
+ * @param n Nodo a nord
+ * @param s	Nodo a sud
+ * @param o Nodo a ovest
+ * @param e Nodo a est
+ */
+Nodo::Nodo(int x, int y, Nodo *n, Nodo *s, Nodo *o, Nodo *e) {
 	giocatori = NULL;
 
 	//Imposta le cordinate del nodo
-	this->x = xx;
-	this->y = yy;
+	this->x = x;
+	this->y = y;
 
 	this->nord = n;
 	this->sud = s;
 	this->ovest = o;
 	this->est = e;
+
+	this->estrazioni = MAX_EXTRACTION;
 }
 
 /**
@@ -143,5 +153,26 @@ void Nodo::removeGiocatore(Giocatore *g) {
  */
 StructGiocatori* Nodo::getGiocatori() {
 	return this->giocatori;
+}
+
+/**
+ * Restituisce il numero di estrazioni rimaste nel nodo
+ * @return num. estrazioni rimaste
+ */
+int Nodo::getEstrazioni() {
+	return this->estrazioni;
+}
+
+/**
+ * Restituisce un elemento
+ * @return Elemento
+ */
+Elemento* Nodo::getElemento() {
+	if (this->estrazioni > 0) {
+		this->estrazioni--;
+		return new Elemento();
+	} else {
+		return NULL;
+	}
 }
 

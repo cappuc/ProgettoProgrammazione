@@ -9,6 +9,10 @@
 #define NODO_HPP_
 
 #include "Utility.hpp"
+#include "Elemento.hpp"
+
+
+#define MAX_EXTRACTION 10
 
 class Giocatore;
 
@@ -18,9 +22,10 @@ private:
 	Nodo *nord, *sud, *ovest, *est;
 	int x, y;
 	StructGiocatori *giocatori;
+	int estrazioni;
 
 public:
-	Nodo(int xx, int yy, Nodo *n, Nodo *s, Nodo *o, Nodo *e);
+	Nodo(int x, int y, Nodo *n, Nodo *s, Nodo *o, Nodo *e);
 	int getCordX();
 	int getCordY();
 	Nodo* getNord();
@@ -35,7 +40,8 @@ public:
 	void removeGiocatore(Giocatore *g);
 	bool giocatorePresente(Giocatore *g);
 	StructGiocatori* getGiocatori();
-
+	int getEstrazioni();
+	Elemento* getElemento();
 };
 
 #endif /* NODO_HPP_ */

@@ -10,6 +10,7 @@
 #include <cstring>
 
 #define STRING_LENGTH 50
+#define CLEARBUF cin.ignore(numeric_limits<streamsize>::max(), '\n')
 
 class Giocatore;
 struct StructGiocatori {

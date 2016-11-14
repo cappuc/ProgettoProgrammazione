@@ -13,33 +13,6 @@ Mappa::Mappa() {
 	space_number = 10;
 	this->nodoIniziale = new Nodo(0, 0, 0, 0, 0, 0);
 	this->addNodoVisitato(this->nodoIniziale);
-
-	//Nodo *nn = this->findNodoCord(0, 0);
-	//cout << nn->getCordX() << endl;
-
-//	this->nodoIniziale->goNord()->goOvest();
-//	this->nodoIniziale->goEst()->goSud();
-
-//	stampaMappa(this->nodoIniziale, 0);
-
-	//Giocatore* g = new Giocatore("Fabio", 1, this->nodoIniziale);
-	//this->nodoIniziale->addGiocatore(g);
-	//this->nodoIniziale->stampaGiocatori();
-//	cout << g->getPosizione()->getCordY();
-
-//	for (int i = -10; i < 11; i++) {
-//		for (int j = -10; j < 4; j++) {
-//			if (!(i == 1 && j == -1))
-//				this->addNodoVisitato(this->nuovoNodo(i, j));
-//		}
-//	}
-//
-//	Giocatore* g = new Giocatore("Fabio", 1, this->findNodoCord(2, 3));
-//	Giocatore* g1 = new Giocatore("Fabio", 2, this->findNodoCord(2, 3));
-//	this->findNodoCord(2, 3)->addGiocatore(g);
-//	this->findNodoCord(2, 3)->addGiocatore(g1);
-//
-//	this->stampaMappa();
 }
 
 /**
@@ -64,12 +37,10 @@ Nodo* Mappa::findNodoCord(int x, int y) {
  * @param n Nodo da inserire
  */
 void Mappa::addNodoVisitato(Nodo *n) {
-	//if (n != NULL && !this->findNodoCord(n->getCordX(), n->getCordY())) {
 	Visitati *nuovoNodo = new Visitati;
 	nuovoNodo->nodo = n;
 	nuovoNodo->next = this->nodiVisitati;
 	this->nodiVisitati = nuovoNodo;
-	//}
 }
 
 /**
@@ -123,6 +94,7 @@ Nodo* Mappa::nuovoNodo(int x, int y) {
  * Stampa la mappa
  */
 void Mappa::stampaMappa() {
+	cout << endl << "[MAPPA]" << endl;
 	for (int y = this->minY; y <= this->maxY; y++) {
 		for (int x = this->minX; x <= this->maxX; x++) {
 			Visitati *v1 = this->nodiVisitati;
@@ -146,6 +118,7 @@ void Mappa::stampaMappa() {
 		}
 		cout << endl;
 	}
+	cout << endl;
 }
 
 /**
@@ -195,10 +168,19 @@ void Mappa::stampaNodo(int x, int y, StructGiocatori *g) {
 	}
 }
 
+/**
+ * Restituisce il nodo iniziale
+ * @return Nodo iniziale
+ */
 Nodo* Mappa::getNodoIniziale() {
 	return this->nodoIniziale;
 }
 
+/**
+ * Muove il giocatore in una direzione
+ * @param g 	Giocatore
+ * @param dir 	Direzione
+ */
 void Mappa::moveGiocatore(Giocatore *g, char dir) {
 	Nodo *oldNode = g->getPosizione();
 	Nodo *newNodo = NULL;
@@ -220,7 +202,6 @@ void Mappa::moveGiocatore(Giocatore *g, char dir) {
 		newNodo = this->nuovoNodo(oldNode->getCordX() + 1, oldNode->getCordY());
 		break;
 	}
-	//oldNode->removeGiocatore(g);
 
 	g->setPosizione(newNodo);
 }

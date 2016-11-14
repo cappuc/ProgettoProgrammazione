@@ -15,6 +15,7 @@ private:
 	char nome[STRING_LENGTH];
 	int id;
 	Nodo* posizione;
+	int punti;
 
 public:
 	Giocatore(char* n, int id, Nodo* init);
@@ -22,6 +23,8 @@ public:
 	int getId();
 	void setPosizione(Nodo* n);
 	Nodo* getPosizione();
+	void incPunti(int punti);
+	int getPunti();
 };
 
 #endif /* GIOCATORE_HPP_ */

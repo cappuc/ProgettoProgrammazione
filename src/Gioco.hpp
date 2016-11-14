@@ -9,7 +9,9 @@
 #include "Utility.hpp"
 #include "Mappa.hpp"
 #include "Nodo.hpp"
-#include "Gioco.hpp"
+#include "Elemento.hpp"
+
+#define PUNTEGGIO_VITTORIA 1000
 
 class Gioco {
 private:
@@ -17,6 +19,10 @@ private:
 	Mappa *mappa;
 	int turno;
 	void aggiungiGiocatore(Giocatore *g);
+	void turnoGiocatore(Giocatore *g);
+	void muoviGiocatore(Giocatore *g);
+	void estraiElemento(Giocatore *g);
+	bool controlloVittoria(Giocatore *g);
 
 public:
 	Gioco();

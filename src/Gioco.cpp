@@ -24,7 +24,7 @@ void Gioco::configuraPartita() {
 	do {
 		cout << "Nome giocatore: ";
 		cin >> nome;
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		CLEARBUF;
 		Giocatore *g = new Giocatore(nome, id_gioc++, this->mappa->getNodoIniziale());
 		this->aggiungiGiocatore(g);
 		this->mappa->getNodoIniziale()->addGiocatore(g);
@@ -34,34 +34,32 @@ void Gioco::configuraPartita() {
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		} while (control != 's' && control != 'n');
 	} while (control != 'n');
+
+	cout << "Vince il giocatore che guadagna per primo: " << PUNTEGGIO_VITTORIA << " punti" << endl;
 }
 
 /**
  * Inizia la partita
  */
 void Gioco::iniziaPartita() {
-	char dir;
-
+	bool fine = false;
 	StructGiocatori *currentGiocatore = this->giocatoriHead;
 	this->mappa->stampaMappa();
 
 	do {
-		cout << "Turno [" << turno << "] di: " << currentGiocatore->giocatore->getNome() << endl;
 
-		do {
-			dir = ' ';
-			cout << "In che direzione vuoi muoverti? [w/a/s/d] ";
-			cin >> dir;
-			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-		} while (dir != 'w' && dir != 'a' && dir != 's' && dir != 'd');
+		this->turnoGiocatore(currentGiocatore->giocatore);
 
-		this->mappa->moveGiocatore(currentGiocatore->giocatore, dir);
+		fine = controlloVittoria(currentGiocatore->giocatore);
 
-		this->mappa->stampaMappa();
+		if (!fine) {
+			currentGiocatore = currentGiocatore->next;
+			if (currentGiocatore == this->giocatoriHead) turno++;
+		}
+	} while (!fine);
 
-		currentGiocatore = currentGiocatore->next;
-		if (currentGiocatore == this->giocatoriHead) turno++;
-	} while (turno < 10);
+	cout << endl;
+	cout << "Ha vinto " << currentGiocatore->giocatore->getNome() << " con " << currentGiocatore->giocatore->getPunti() << endl;
 }
 
 /**
@@ -81,5 +79,76 @@ void Gioco::aggiungiGiocatore(Giocatore *g) {
 		this->giocatoriTail->next = newGioc;
 		this->giocatoriTail = newGioc;
 	}
+}
+
+/**
+ * Elabora il turno del giocatore
+ * @param giocatore
+ */
+void Gioco::turnoGiocatore(Giocatore *giocatore) {
+	char scelta;
+
+	cout << "Turno [" << turno << "] di: " << giocatore->getNome() << " - Punti: " << giocatore->getPunti() << endl;
+
+	do {
+		scelta = ' ';
+		cout << "Nel nodo corrente sono rimaste " << giocatore->getPosizione()->getEstrazioni() << " estrazioni" << endl;
+		cout << "Vuoi muoverti o estrarre un elemento dal nodo corrente? [m/e] ";
+		cin >> scelta;
+		CLEARBUF;
+
+		switch (scelta) {
+		case 'm':
+			this->muoviGiocatore(giocatore);
+			this->estraiElemento(giocatore);
+			break;
+		case 'e':
+			this->estraiElemento(giocatore);
+			break;
+		}
+	} while (scelta != 'm' && scelta != 'e');
+
+	cout << "Fine turno di: " << giocatore->getNome() << " - Punti: " << giocatore->getPunti() << endl;
+
+	this->mappa->stampaMappa();
+}
+
+/**
+ * Muove il giocatore in un nuovo nodo
+ * @param giocatore
+ */
+void Gioco::muoviGiocatore(Giocatore *giocatore) {
+	char dir;
+	do {
+		dir = ' ';
+		cout << "In che direzione vuoi muoverti? [w/a/s/d] ";
+		cin >> dir;
+		CLEARBUF;
+	} while (dir != 'w' && dir != 'a' && dir != 's' && dir != 'd');
+
+	this->mappa->moveGiocatore(giocatore, dir);
+}
+
+/**
+ * Estrae un elemento dal nodo corrente e assegna i punti al giocatore
+ * @param giocatore
+ */
+void Gioco::estraiElemento(Giocatore *giocatore) {
+	Elemento* el = giocatore->getPosizione()->getElemento();
+	if (el != NULL) {
+		cout << "Hai trovato: " << el->getElemento() << " - Punti: " << el->getPunti() << endl;
+		giocatore->incPunti(el->getPunti());
+	} else {
+		cout << "Non ci sono più risorse disponibili in questo nodo" << endl;
+	}
+}
+
+/**
+ * Controlla se il giocatore ha raggiunto il punteggio per la vittoria
+ * @param giocatore
+ * @return true/false
+ */
+bool Gioco::controlloVittoria(Giocatore *giocatore) {
+	return giocatore->getPunti() >= PUNTEGGIO_VITTORIA ? true : false;
 }
 
