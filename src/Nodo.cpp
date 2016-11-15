@@ -27,7 +27,7 @@ Nodo::Nodo(int x, int y, Nodo *n, Nodo *s, Nodo *o, Nodo *e) {
 	this->ovest = o;
 	this->est = e;
 
-	this->estrazioni = MAX_EXTRACTION;
+	this->estrazioni = (rand() % MAX_EXTRACTION) + 1;
 }
 
 /**
@@ -170,7 +170,7 @@ int Nodo::getEstrazioni() {
 Elemento* Nodo::getElemento() {
 	if (this->estrazioni > 0) {
 		this->estrazioni--;
-		return new Elemento();
+		return (rand() % 100 < 80) ? new Elemento() : NULL;
 	} else {
 		return NULL;
 	}

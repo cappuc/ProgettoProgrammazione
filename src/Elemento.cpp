@@ -8,7 +8,7 @@
  * Genera un elemento casualmente
  */
 Elemento::Elemento() {
-	int percentuale = rand() % 100;
+	int percentuale = (rand() % 100) +1;
 	int el_perc = 0;
 
 	for (int i=0; i<Elemento_Num; i++) {

@@ -18,4 +18,11 @@ struct StructGiocatori {
 	StructGiocatori *next;
 };
 
+void printStart(int punteggio);
+void printStartTurn(char* nome, int punteggio, int turno);
+void printEndTurn(char* nome, int punteggio);
+void printWin(char* nome, int punti);
+void printMap();
+void printWait();
+
 #endif /* UTILITY_HPP_ */

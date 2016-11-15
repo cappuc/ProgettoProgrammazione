@@ -35,7 +35,7 @@ void Gioco::configuraPartita() {
 		} while (control != 's' && control != 'n');
 	} while (control != 'n');
 
-	cout << "Vince il giocatore che guadagna per primo: " << PUNTEGGIO_VITTORIA << " punti" << endl;
+	printStart(PUNTEGGIO_VITTORIA);
 }
 
 /**
@@ -50,6 +50,8 @@ void Gioco::iniziaPartita() {
 
 		this->turnoGiocatore(currentGiocatore->giocatore);
 
+		printWait();
+
 		fine = controlloVittoria(currentGiocatore->giocatore);
 
 		if (!fine) {
@@ -59,7 +61,7 @@ void Gioco::iniziaPartita() {
 	} while (!fine);
 
 	cout << endl;
-	cout << "Ha vinto " << currentGiocatore->giocatore->getNome() << " con " << currentGiocatore->giocatore->getPunti() << endl;
+	cout << "Ha vinto " << currentGiocatore->giocatore->getNome() << " con " << currentGiocatore->giocatore->getPunti() << " punti!" << endl;
 }
 
 /**
@@ -88,11 +90,11 @@ void Gioco::aggiungiGiocatore(Giocatore *g) {
 void Gioco::turnoGiocatore(Giocatore *giocatore) {
 	char scelta;
 
-	cout << "Turno [" << turno << "] di: " << giocatore->getNome() << " - Punti: " << giocatore->getPunti() << endl;
+//	cout << "Turno [" << turno << "] di: " << giocatore->getNome() << " - Punti: " << giocatore->getPunti() << endl;
+	printStartTurn(giocatore->getNome(), giocatore->getPunti(), turno);
 
 	do {
 		scelta = ' ';
-		cout << "Nel nodo corrente sono rimaste " << giocatore->getPosizione()->getEstrazioni() << " estrazioni" << endl;
 		cout << "Vuoi muoverti o estrarre un elemento dal nodo corrente? [m/e] ";
 		cin >> scelta;
 		CLEARBUF;
@@ -108,7 +110,9 @@ void Gioco::turnoGiocatore(Giocatore *giocatore) {
 		}
 	} while (scelta != 'm' && scelta != 'e');
 
-	cout << "Fine turno di: " << giocatore->getNome() << " - Punti: " << giocatore->getPunti() << endl;
+//	cout << "Fine turno di: " << giocatore->getNome() << " - Punti: " << giocatore->getPunti() << endl;
+
+	printEndTurn(giocatore->getNome(), giocatore->getPunti());
 
 	this->mappa->stampaMappa();
 }
@@ -135,12 +139,19 @@ void Gioco::muoviGiocatore(Giocatore *giocatore) {
  */
 void Gioco::estraiElemento(Giocatore *giocatore) {
 	Elemento* el = giocatore->getPosizione()->getElemento();
+	cout << endl;
 	if (el != NULL) {
 		cout << "Hai trovato: " << el->getElemento() << " - Punti: " << el->getPunti() << endl;
 		giocatore->incPunti(el->getPunti());
 	} else {
-		cout << "Non ci sono più risorse disponibili in questo nodo" << endl;
+		if (giocatore->getPosizione()->getEstrazioni() == 0) {
+			cout << "Non ci sono più risorse disponibili in questo nodo" << endl;
+		} else {
+			cout << "Non hai trovato niente" << endl;
+		}
 	}
+	cout << endl;
+	delete el;
 }
 
 /**

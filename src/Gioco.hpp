@@ -6,6 +6,7 @@
 #define GIOCO_HPP_
 
 #include <limits>
+#include <stdio.h>
 #include "Utility.hpp"
 #include "Mappa.hpp"
 #include "Nodo.hpp"

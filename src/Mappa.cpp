@@ -94,7 +94,8 @@ Nodo* Mappa::nuovoNodo(int x, int y) {
  * Stampa la mappa
  */
 void Mappa::stampaMappa() {
-	cout << endl << "[MAPPA]" << endl;
+//	cout << endl << "=========================     MAPPA      =========================" << endl;
+	printMap();
 	for (int y = this->minY; y <= this->maxY; y++) {
 		for (int x = this->minX; x <= this->maxX; x++) {
 			Visitati *v1 = this->nodiVisitati;

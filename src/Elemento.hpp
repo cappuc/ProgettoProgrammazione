@@ -11,7 +11,7 @@
 //Possibili elementi
 static const char Elemento_Nomi[][10] = { "Bronzo", "Argento", "Oro", "Platino", "Diamante"};
 static const int Elemento_Punti[] = { 25, 75, 100, 125, 200 };
-static const int Elemento_Prob[] = { 35, 25, 20, 15, 5 };
+static const int Elemento_Prob[] = { 45, 30, 15, 7, 3 };
 static const int Elemento_Num = 5;
 
 class Elemento {
