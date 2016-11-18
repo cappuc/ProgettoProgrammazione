@@ -11,9 +11,9 @@ void printStart(int punteggio) {
 	cout << "========================= INIZIO PARTITA =========================" << endl << endl;
 }
 
-void printStartTurn(char* nome, int punteggio, int turno) {
+void printStartTurn(char* nome, int id, int punteggio, int turno) {
 	cout << "=========================  INIZIO TURNO  =========================" << endl;
-	cout << "Turno [" << turno << "] di: " << nome << " - Punti: " << punteggio << endl << endl;
+	cout << "Turno [" << turno << "] di: " << nome << " - ID: " << id << " - Punti: " << punteggio << endl << endl;
 }
 
 void printEndTurn(char* nome, int punteggio) {

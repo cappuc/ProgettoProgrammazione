@@ -91,7 +91,7 @@ void Gioco::turnoGiocatore(Giocatore *giocatore) {
 	char scelta;
 
 //	cout << "Turno [" << turno << "] di: " << giocatore->getNome() << " - Punti: " << giocatore->getPunti() << endl;
-	printStartTurn(giocatore->getNome(), giocatore->getPunti(), turno);
+	printStartTurn(giocatore->getNome(), giocatore->getId(), giocatore->getPunti(), turno);
 
 	do {
 		scelta = ' ';
