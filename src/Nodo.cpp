@@ -27,7 +27,7 @@ Nodo::Nodo(int x, int y, Nodo *n, Nodo *s, Nodo *o, Nodo *e) {
 	this->ovest = o;
 	this->est = e;
 
-	this->estrazioni = (rand() % MAX_EXTRACTION) + 1;
+	this->estrazioni = (rand() % MAX_EXTRACTION) + 4;
 }
 
 /**
